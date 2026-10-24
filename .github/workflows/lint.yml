@@ -1,0 +1,72 @@
+name: Lint Design System
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Lint DESIGN.md
+        run: |
+          npx --yes -p "@google/design.md" designmd lint DESIGN.md | tee lint.json
+
+      - name: Fail on errors
+        run: |
+          # 有 error 就让 CI 挂；warning 只提示（对比度已单独校验）
+          ERRORS=$(python -c "import json;print(json.load(open('lint.json'))['summary']['errors'])")
+          echo "errors=$ERRORS"
+          if [ "$ERRORS" != "0" ]; then exit 1; fi
+
+      - name: Verify contrast ratios independently
+        run: |
+          # 不依赖 node 的独立核对，防止 linter 版本变化导致漏检
+          python contrast.py
+          python - <<'PY'
+          import sys
+          sys.path.insert(0, '.')
+          from contrast import ratio
+          checks = [
+              ("ink on canvas", "#202123", "#ffffff", 4.5),
+              ("ink-soft on canvas", "#62635f", "#ffffff", 4.5),
+              ("ink-mute on canvas", "#6b6c68", "#ffffff", 4.5),
+              ("ink-mute on canvas-soft", "#6b6c68", "#f7f7f5", 4.5),
+              ("brand on canvas", "#167153", "#ffffff", 4.5),
+              ("on-button on button", "#ffffff", "#202123", 4.5),
+              ("dark-ink-mute on dark-surface", "#9a9b97", "#292a2d", 4.5),
+              ("dark-brand on dark-canvas", "#67c79e", "#202123", 4.5),
+          ]
+          bad = []
+          for name, fg, bg, minimum in checks:
+              r = ratio(fg, bg)
+              status = "OK" if r >= minimum else "FAIL"
+              print(f"{name:36} {r:6.2f}:1  {status}")
+              if r < minimum:
+                  bad.append(name)
+          if bad:
+              print("FAILED:", bad)
+              sys.exit(1)
+          PY
+
+      - name: Check exported tokens are up to date
+        run: |
+          npx --yes -p "@google/design.md" designmd export DESIGN.md --format css-vars > /tmp/tokens.css
+          if ! diff -q /tmp/tokens.css dist/tokens.css > /dev/null; then
+            echo "::error::dist/tokens.css 与 DESIGN.md 不同步，请重新导出"
+            diff /tmp/tokens.css dist/tokens.css || true
+            exit 1
+          fi
