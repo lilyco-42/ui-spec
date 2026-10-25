@@ -638,6 +638,61 @@
     </div>
   </section>
 
+  <!-- 补充组件 -->
+  <section class="demo-section">
+    <h2>补充组件</h2>
+    <p class="text-soft">验证码、悬停卡片、菜单栏、导航菜单、标记、附件。</p>
+
+    <div class="stack">
+      <div class="field">
+        <label class="label">验证码</label>
+        <div class="otp">
+          <input class="otp__input" maxlength="1" value="4" aria-label="第 1 位">
+          <input class="otp__input" maxlength="1" value="8" aria-label="第 2 位">
+          <input class="otp__input" maxlength="1" value="2" aria-label="第 3 位">
+          <span class="otp__sep">—</span>
+          <input class="otp__input" maxlength="1" aria-label="第 4 位">
+          <input class="otp__input" maxlength="1" aria-label="第 5 位">
+          <input class="otp__input" maxlength="1" aria-label="第 6 位">
+        </div>
+      </div>
+
+      <div class="demo-row">
+        <div class="hover-card">
+          <button class="btn btn--secondary">悬停看卡片</button>
+          <div class="hover-card__panel">
+            <div class="hover-card__title">sense-voice</div>
+            <div class="hover-card__desc">72 个 token 全部带时间戳，20 秒分块识别，中文标点准确。</div>
+          </div>
+        </div>
+        <span class="mark">高亮文字</span>
+        <span class="mark mark--brand">品牌高亮</span>
+      </div>
+
+      <div class="menubar">
+        <button class="menubar__item">文件</button>
+        <button class="menubar__item">编辑</button>
+        <button class="menubar__item">视图</button>
+        <button class="menubar__item" disabled>帮助</button>
+      </div>
+
+      <nav class="navmenu">
+        <a class="navmenu__link" href="#" aria-current="page">首页</a>
+        <a class="navmenu__link" href="#">文档</a>
+        <a class="navmenu__link" href="#">定价</a>
+      </nav>
+
+      <div class="attachment">
+        <span class="attachment__icon">SRT</span>
+        <div class="attachment__body">
+          <div class="attachment__name">demo.zh.srt</div>
+          <div class="attachment__meta">10 条字幕 · 4.2 KB</div>
+        </div>
+        <button class="attachment__action" aria-label="移除">×</button>
+      </div>
+    </div>
+  </section>
+
   <footer class="text-sm text-mute" style="padding-top:32px;border-top:1px solid var(--color-line)">
     lain42 UI · MIT · 所有颜色经 WCAG AA 校验
   </footer>

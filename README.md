@@ -39,6 +39,7 @@ verify_pixels.py   ← 真实渲染像素验证（抓 CSS 变量失效这类 bug
 | 可调整面板 | `.split` 横向/纵向拖拽 · 1px 视觉 9px 热区 |
 | 图表 | `.sparkline` · `.bars` · `.bar-list` · `.ring` · `.legend` |
 | 对话 | `.message` 收发/系统 · `.typing` · `.composer` |
+| 补充 | `.otp` · `.hover-card` · `.menubar` · `.navmenu` · `.mark` · `.attachment` · RTL |
 
 `src/ui.js` 只做 CSS 做不到的部分：标签页键盘导航、`<dialog>` 开关、
 下拉菜单、Toast、命令面板过滤、主题切换。没有 JS 时页面仍可用。

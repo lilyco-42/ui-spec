@@ -38,6 +38,7 @@ ORDER = [
     "components/resizable.css",
     "components/chart.css",
     "components/chat.css",
+    "components/extra.css",
     "utilities.css",
 ]
 
