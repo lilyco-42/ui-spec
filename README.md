@@ -1,13 +1,62 @@
-# ui-spec · lain42 设计规范
+# ui-spec · lain42 设计规范与组件库
 
-**可被脚本强制执行**的 UI 规范。不是一堆说明文档，而是能被 linter 检查、
-能被 CI 拦截、能导出成 CSS 变量的单一事实来源。
+**可被脚本强制执行**的 UI 规范 + 48 个开箱即用组件。
+不是一堆说明文档，而是能被 linter 检查、被 CI 拦截、被真实浏览器验证的
+单一事实来源。
 
 ```
-DESIGN.md          ← 唯一事实来源（YAML 令牌 + 设计理由）
+DESIGN.md          ← 唯一事实来源（54 色 / 7 字号 / 48 组件）
+src/               ← 组件源文件（改这里）
 dist/tokens.css    ← 由 DESIGN.md 生成，不要手改
-contrast.py        ← WCAG 对比度计算（核实 lint 结论）
+dist/ui.css        ← 由 src/ 合并生成，不要手改
+index.html         ← 组件总览，浏览器直接打开
+build.py           ← src/ -> dist/ui.css
+contrast.py        ← WCAG 对比度计算
+check_tokens.py    ← 独立核对（不依赖 node）
+verify_pixels.py   ← 真实渲染像素验证（抓 CSS 变量失效这类 bug）
 ```
+
+## 组件一览
+
+**无框架、无构建链**，纯 CSS + 4KB 原生 JS。适合手写 HTML 的静态站
+（如 lain42.top），也适合任何有构建链的项目。
+
+| 类别 | 组件 |
+|---|---|
+| 按钮 | `.btn` 6 变体 · 3 尺寸 · 图标 · 加载态 · 禁用态 · `.btn-group` |
+| 表单 | `.input` `.textarea` `.select` `.input-group` `.check` `.switch` `.slider` 校验态/禁用态 |
+| 容器 | `.card` 4 变体 · `.panel` · `.list` |
+| 标记 | `.badge` 6 变体 · `.dot` · `.kbd` · `.avatar` · `.chip` |
+| 反馈 | `.alert` 4 变体 · `.progress` · `.spinner` · `.skeleton` · `.empty` · `.toast` |
+| 覆盖层 | `.dialog` · `.drawer` · `.menu` · `.tooltip` · `.popover` |
+| 导航 | `.tabs` · `.breadcrumb` · `.pagination` · `.sidebar` · `.topbar` · `.shell` |
+| 数据 | `.table` · `.desc` · `.stat` · `.timeline` |
+| 折叠 | `.accordion` · `.collapsible` · `.toggle` · `.toggle-group` · `.separator` · `.ratio` · `.scroll-area` |
+| 命令面板 | `.command`（输入过滤 + 上下键 + 回车） |
+
+`src/ui.js` 只做 CSS 做不到的部分：标签页键盘导航、`<dialog>` 开关、
+下拉菜单、Toast、命令面板过滤、主题切换。没有 JS 时页面仍可用。
+
+```html
+<link rel="stylesheet" href="dist/tokens.css">
+<link rel="stylesheet" href="dist/ui.css">
+<script src="src/ui.js" defer></script>
+
+<button class="btn btn--brand">开始</button>
+<span class="badge badge--success">已完成</span>
+```
+
+## 三道验证闸门
+
+| 闸门 | 抓什么 | 命令 |
+|---|---|---|
+| `designmd lint` | 对比度、孤立令牌、结构 | `npx -p "@google/design.md" designmd lint DESIGN.md` |
+| `check_tokens.py` | 同上，但不依赖 node | `python check_tokens.py` |
+| `verify_pixels.py` | **真实渲染**的对比度 | `python verify_pixels.py light\|dark` |
+
+第三道是关键。前两道都基于令牌值推算，抓不到「暗色主题变量没生效」
+这类问题——实测踩过：`getComputedStyle` 在动态改 `data-theme` 后返回
+缓存值，会同时骗过验证脚本和开发者。只有截图取真实像素才靠得住。
 
 ## 为什么用 DESIGN.md 格式
 
