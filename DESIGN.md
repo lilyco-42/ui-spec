@@ -32,8 +32,22 @@ colors:
   brand-soft: "#e8f3ee"
   on-brand: "#ffffff"
   success: "#167153"
+  success-soft: "#e8f3ee"
   warning: "#9a6700"
+  warning-soft: "#fdf6e3"
   danger: "#c43b32"
+  danger-soft: "#fdecea"
+  on-danger: "#ffffff"
+  info: "#0b6bcb"
+  info-soft: "#e8f1fb"
+
+  # 表单与交互态（商业组件必需）
+  focus-ring: "#167153"
+  disabled-surface: "#f0f0ed"
+  # 原值 #8b8c87 在白底 3.39:1，不达标 —— 禁用态也要可读。
+  disabled-ink: "#6b6c68"
+  overlay: "#202123"
+  selection: "#e8f3ee"
 
   # 按钮
   button: "#202123"
@@ -54,6 +68,20 @@ colors:
   dark-brand: "#67c79e"
   dark-brand-soft: "#173d31"
   dark-on-brand: "#202123"
+  dark-success-soft: "#173d31"
+  dark-warning: "#e9b949"
+  dark-warning-soft: "#3d2f12"
+  dark-danger: "#ff8278"
+  dark-danger-soft: "#3d1f1d"
+  # 亮红底上必须用深色文字：白字只有 2.41:1，深色 8.9:1
+  dark-on-danger: "#202123"
+  dark-info: "#7ab8f5"
+  dark-info-soft: "#12293d"
+  dark-disabled-surface: "#343539"
+  # 原 #9a9b97 在 #343539 上只有 4.38:1，提亮到 #a8a9a5
+  dark-disabled-ink: "#a8a9a5"
+  dark-overlay: "#000000"
+  dark-selection: "#173d31"
 
 typography:
   body:
@@ -204,6 +232,98 @@ components:
     textColor: "{colors.dark-ink-mute}"
     rounded: "{rounded.sm}"
     padding: 4px
+
+  # ---- 语义状态（与 src/components 实现一一对应） ----
+  badge-success:
+    backgroundColor: "{colors.success-soft}"
+    textColor: "{colors.success}"
+    rounded: "{rounded.pill}"
+    padding: 3px 10px
+  badge-warning:
+    backgroundColor: "{colors.warning-soft}"
+    textColor: "{colors.warning}"
+    rounded: "{rounded.pill}"
+    padding: 3px 10px
+  badge-danger:
+    backgroundColor: "{colors.danger-soft}"
+    textColor: "{colors.danger}"
+    rounded: "{rounded.pill}"
+    padding: 3px 10px
+  badge-info:
+    backgroundColor: "{colors.info-soft}"
+    textColor: "{colors.info}"
+    rounded: "{rounded.pill}"
+    padding: 3px 10px
+  button-danger:
+    backgroundColor: "{colors.danger}"
+    textColor: "{colors.on-danger}"
+    rounded: "{rounded.md}"
+    padding: 10px 16px
+    height: 44px
+  button-danger-dark:
+    backgroundColor: "{colors.dark-danger}"
+    textColor: "{colors.dark-on-danger}"
+    rounded: "{rounded.md}"
+    padding: 10px 16px
+    height: 44px
+
+  # ---- 表单与交互态 ----
+  input-focus:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: 10px 12px
+  input-disabled:
+    backgroundColor: "{colors.disabled-surface}"
+    textColor: "{colors.disabled-ink}"
+    rounded: "{rounded.md}"
+    padding: 10px 12px
+  input-disabled-dark:
+    backgroundColor: "{colors.dark-disabled-surface}"
+    textColor: "{colors.dark-disabled-ink}"
+    rounded: "{rounded.md}"
+    padding: 10px 12px
+  selection:
+    backgroundColor: "{colors.selection}"
+    textColor: "{colors.ink}"
+  selection-dark:
+    backgroundColor: "{colors.dark-selection}"
+    textColor: "{colors.dark-ink}"
+  focus-outline:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.focus-ring}"
+    rounded: "{rounded.sm}"
+    padding: 2px
+
+  # ---- 暗色语义状态 ----
+  alert-success-dark:
+    backgroundColor: "{colors.dark-success-soft}"
+    textColor: "{colors.dark-brand}"
+    rounded: "{rounded.md}"
+    padding: 12px
+  alert-warning-dark:
+    backgroundColor: "{colors.dark-warning-soft}"
+    textColor: "{colors.dark-warning}"
+    rounded: "{rounded.md}"
+    padding: 12px
+  alert-danger-dark:
+    backgroundColor: "{colors.dark-danger-soft}"
+    textColor: "{colors.dark-danger}"
+    rounded: "{rounded.md}"
+    padding: 12px
+  alert-info-dark:
+    backgroundColor: "{colors.dark-info-soft}"
+    textColor: "{colors.dark-info}"
+    rounded: "{rounded.md}"
+    padding: 12px
+
+  # ---- 覆盖层 ----
+  scrim:
+    backgroundColor: "{colors.overlay}"
+    textColor: "{colors.ink-inverse}"
+  scrim-dark:
+    backgroundColor: "{colors.dark-overlay}"
+    textColor: "{colors.dark-ink}"
   page-inverse:
     backgroundColor: "{colors.button}"
     textColor: "{colors.ink-inverse}"

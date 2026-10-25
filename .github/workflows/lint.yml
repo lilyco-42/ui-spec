@@ -9,7 +9,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -21,16 +21,28 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install deps
+        run: pip install pillow
+
       - name: Lint DESIGN.md
         run: |
           npx --yes -p "@google/design.md" designmd lint DESIGN.md | tee lint.json
 
-      - name: Fail on errors
+      - name: Fail on errors or orphaned tokens
         run: |
-          # 有 error 就让 CI 挂；warning 只提示（对比度已单独校验）
-          ERRORS=$(python -c "import json;print(json.load(open('lint.json'))['summary']['errors'])")
-          echo "errors=$ERRORS"
-          if [ "$ERRORS" != "0" ]; then exit 1; fi
+          # error 和 warning 都算失败。
+          # warning 里最要紧的是 orphaned-tokens —— 令牌定义了却没人用，
+          # 说明规范和实现脱节了。
+          python - <<'PY'
+          import json, sys
+          d = json.load(open("lint.json"))
+          s = d["summary"]
+          print(f"errors={s['errors']} warnings={s['warnings']}")
+          for f in d.get("findings", []):
+              print(f"  [{f['severity']}] {f['message'][:160]}")
+          if s["errors"] or s["warnings"]:
+              sys.exit(1)
+          PY
 
       # 第二道闸门：不依赖 node / linter 的独立核对。
       # linter 可能改规则或某天不可用，这个脚本用 WCAG 2.1 公式自己算。
@@ -45,3 +57,26 @@ jobs:
             diff /tmp/tokens.css dist/tokens.css || true
             exit 1
           fi
+
+      - name: Check dist/ui.css is up to date
+        run: |
+          python build.py
+          if ! git diff --quiet dist/ui.css; then
+            echo "::error::dist/ui.css 与 src/ 不同步，请跑 python build.py"
+            git diff --stat dist/ui.css
+            exit 1
+          fi
+
+      # 第三道闸门：真实渲染像素。
+      # 这是唯一能抓到「暗色主题变量没生效」这类问题的方法 ——
+      # getComputedStyle 会返回缓存值，CSS 值推算也抓不到。
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Verify rendered contrast (light)
+        run: python verify_pixels.py light
+
+      - name: Verify rendered contrast (dark)
+        run: python verify_pixels.py dark

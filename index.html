@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>lain42 UI · 组件库</title>
+<link rel="stylesheet" href="dist/tokens.css">
+<link rel="stylesheet" href="dist/ui.css">
+<style>
+  /* 演示页自己的布局，不属于组件库 */
+  .demo-section { margin-bottom: 56px; }
+  .demo-section > h2 { margin-bottom: 6px; }
+  .demo-section > .text-soft { margin-bottom: 20px; font-size: 14px; }
+  .demo-grid { display: grid; gap: 14px; }
+  .demo-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .demo-swatch {
+    display: grid; gap: 4px;
+    padding: 10px; border: 1px solid var(--color-line);
+    border-radius: var(--rounded-sm); font-size: 11px;
+    font-family: ui-monospace, monospace;
+  }
+  .demo-swatch i { display: block; height: 40px; border-radius: 6px; border: 1px solid var(--color-line); }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主内容</a>
+
+<header class="topbar">
+  <strong>lain42 UI</strong>
+  <span class="badge badge--brand">v0.1</span>
+  <div class="topbar__actions">
+    <button class="btn btn--ghost btn--icon" data-theme-toggle aria-label="切换主题">◐</button>
+  </div>
+</header>
+
+<main class="main" id="main">
+
+  <section class="demo-section">
+    <p class="eyebrow">Foundation</p>
+    <h1>组件库</h1>
+    <p class="text-soft">对标商业设计系统，纯 CSS + 4KB 原生 JS，无框架依赖。</p>
+  </section>
+
+  <!-- 颜色 -->
+  <section class="demo-section">
+    <h2>颜色</h2>
+    <p class="text-soft">所有令牌都经过 WCAG AA 校验，文字/背景对比度 ≥ 4.5:1。</p>
+    <div class="swatches">
+      <div class="demo-swatch"><i style="background:var(--color-canvas)"></i>canvas</div>
+      <div class="demo-swatch"><i style="background:var(--color-canvas-soft)"></i>canvas-soft</div>
+      <div class="demo-swatch"><i style="background:var(--color-surface)"></i>surface</div>
+      <div class="demo-swatch"><i style="background:var(--color-ink)"></i>ink</div>
+      <div class="demo-swatch"><i style="background:var(--color-ink-soft)"></i>ink-soft</div>
+      <div class="demo-swatch"><i style="background:var(--color-ink-mute)"></i>ink-mute</div>
+      <div class="demo-swatch"><i style="background:var(--color-brand)"></i>brand</div>
+      <div class="demo-swatch"><i style="background:var(--color-brand-soft)"></i>brand-soft</div>
+      <div class="demo-swatch"><i style="background:var(--color-success)"></i>success</div>
+      <div class="demo-swatch"><i style="background:var(--color-warning)"></i>warning</div>
+      <div class="demo-swatch"><i style="background:var(--color-danger)"></i>danger</div>
+      <div class="demo-swatch"><i style="background:var(--color-info)"></i>info</div>
+    </div>
+  </section>
+
+  <!-- 按钮 -->
+  <section class="demo-section">
+    <h2>按钮</h2>
+    <p class="text-soft">最小触摸区 44px，含 hover / active / disabled / loading 四态。</p>
+    <div class="demo-row">
+      <button class="btn">主要</button>
+      <button class="btn btn--brand">品牌</button>
+      <button class="btn btn--secondary">次要</button>
+      <button class="btn btn--quiet">安静</button>
+      <button class="btn btn--ghost">幽灵</button>
+      <button class="btn btn--danger">危险</button>
+      <button class="btn" disabled>禁用</button>
+      <button class="btn" data-loading="true">加载</button>
+    </div>
+    <div class="demo-row mt-md">
+      <button class="btn btn--sm">小号</button>
+      <button class="btn">默认</button>
+      <button class="btn btn--lg">大号</button>
+      <button class="btn btn--secondary btn--icon" aria-label="设置">⚙</button>
+    </div>
+    <div class="demo-row mt-md">
+      <div class="btn-group">
+        <button class="btn btn--secondary">左</button>
+        <button class="btn btn--secondary">中</button>
+        <button class="btn btn--secondary">右</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 表单 -->
+  <section class="demo-section">
+    <h2>表单</h2>
+    <p class="text-soft">含校验态、禁用态、输入组、开关、滑块。</p>
+    <div class="grid grid--2">
+      <div class="field">
+        <label class="label" for="d1">项目名称 <span class="label__hint">必填</span></label>
+        <input class="input" id="d1" placeholder="输入名称…">
+      </div>
+      <div class="field">
+        <label class="label" for="d2">出错状态</label>
+        <input class="input" id="d2" aria-invalid="true" value="非法值">
+        <span class="field__error">这个名称已被占用</span>
+      </div>
+      <div class="field">
+        <label class="label" for="d3">禁用</label>
+        <input class="input" id="d3" disabled value="不可编辑">
+      </div>
+      <div class="field">
+        <label class="label" for="d4">选择器</label>
+        <select class="select" id="d4">
+          <option>选项一</option>
+          <option>选项二</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field mt-lg">
+      <label class="label" for="d5">输入组</label>
+      <div class="input-group">
+        <span class="input-group__addon">https://</span>
+        <input class="input" id="d5" placeholder="lain42.top">
+        <span class="input-group__addon">.com</span>
+      </div>
+    </div>
+
+    <div class="field mt-lg">
+      <label class="label" for="d6">多行文本</label>
+      <textarea class="textarea" id="d6" placeholder="写点什么…"></textarea>
+    </div>
+
+    <div class="demo-row mt-lg">
+      <label class="check"><input type="checkbox" checked> 已勾选</label>
+      <label class="check"><input type="checkbox"> 未勾选</label>
+      <label class="switch"><input type="checkbox" checked><span class="switch__track"></span> 开关开</label>
+      <label class="switch"><input type="checkbox"><span class="switch__track"></span> 开关关</label>
+    </div>
+
+    <div class="field mt-lg">
+      <label class="label" for="d7">滑块</label>
+      <input class="slider" type="range" id="d7" value="60">
+    </div>
+  </section>
+
+  <!-- 卡片 -->
+  <section class="demo-section">
+    <h2>卡片</h2>
+    <p class="text-soft">悬停有轻微位移与阴影，表达可点击。</p>
+    <div class="grid grid--3">
+      <div class="card">
+        <div class="card__title">普通卡片</div>
+        <p class="card__desc">带细边框与极轻阴影，是内容的主要容器。</p>
+      </div>
+      <a class="card card--interactive" href="#">
+        <div class="card__title">可点击卡片</div>
+        <p class="card__desc">悬停时上浮 2px，阴影加深。</p>
+      </a>
+      <div class="card card--muted">
+        <div class="card__title">弱化卡片</div>
+        <p class="card__desc">用灰底区分层级，不抢注意力。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 徽章 -->
+  <section class="demo-section">
+    <h2>徽章与状态</h2>
+    <div class="demo-row">
+      <span class="badge">默认</span>
+      <span class="badge badge--brand">品牌</span>
+      <span class="badge badge--success">成功</span>
+      <span class="badge badge--warning">警告</span>
+      <span class="badge badge--danger">危险</span>
+      <span class="badge badge--info">信息</span>
+    </div>
+    <div class="demo-row mt-md">
+      <span class="badge"><span class="dot dot--ok"></span>运行中</span>
+      <span class="badge"><span class="dot dot--warn"></span>排队</span>
+      <span class="badge"><span class="dot dot--err"></span>失败</span>
+      <span class="badge"><span class="dot dot--pulse"></span>进行中</span>
+    </div>
+    <div class="demo-row mt-md">
+      <span class="avatar">L</span>
+      <span class="avatar avatar--sm">S</span>
+      <span class="avatar avatar--lg">XL</span>
+      <span class="kbd">Ctrl</span> <span class="kbd">K</span>
+    </div>
+  </section>
+
+  <!-- 反馈 -->
+  <section class="demo-section">
+    <h2>反馈</h2>
+    <div class="stack">
+      <div class="alert alert--success"><div class="alert__body"><div class="alert__title">保存成功</div>配置已更新。</div></div>
+      <div class="alert alert--warning"><div class="alert__body"><div class="alert__title">注意</div>这个操作不可撤销。</div></div>
+      <div class="alert alert--danger"><div class="alert__body"><div class="alert__title">失败</div>网络连接超时。</div></div>
+      <div class="alert alert--info"><div class="alert__body"><div class="alert__title">提示</div>按 Ctrl+K 打开命令面板。</div></div>
+    </div>
+
+    <div class="stack mt-lg">
+      <div class="progress"><div class="progress__bar" style="width:62%"></div></div>
+      <div class="progress progress--indeterminate"><div class="progress__bar"></div></div>
+      <div class="demo-row"><span class="spinner"></span><span class="spinner spinner--lg"></span></div>
+    </div>
+
+    <div class="grid grid--3 mt-lg">
+      <div class="card">
+        <div class="skeleton skeleton--title"></div>
+        <div class="skeleton skeleton--text"></div>
+        <div class="skeleton skeleton--text" style="width:70%"></div>
+      </div>
+      <div class="skeleton skeleton--block"></div>
+      <div class="empty">
+        <div class="empty__title">暂无数据</div>
+        <div class="empty__desc">上传第一个文件后，这里会显示处理记录。</div>
+      </div>
+    </div>
+
+    <div class="demo-row mt-lg">
+      <button class="btn btn--secondary" onclick="UI.toast('已保存','success')">弹成功提示</button>
+      <button class="btn btn--secondary" onclick="UI.toast('出错了','danger')">弹错误提示</button>
+    </div>
+  </section>
+
+  <!-- 覆盖层 -->
+  <section class="demo-section">
+    <h2>覆盖层</h2>
+    <p class="text-soft">基于原生 &lt;dialog&gt;，自带焦点陷阱与 Esc 关闭。</p>
+    <div class="demo-row">
+      <button class="btn btn--secondary" data-dialog-open="dlg-demo">打开对话框</button>
+      <div class="tooltip">
+        <button class="btn btn--ghost">悬停看提示</button>
+        <span class="tooltip__tip">这是一个 tooltip</span>
+      </div>
+      <div style="position:relative">
+        <button class="btn btn--secondary" data-menu-toggle="menu-demo" aria-expanded="false">下拉菜单</button>
+        <div class="menu" id="menu-demo" hidden style="position:absolute;top:calc(100% + 6px);left:0;z-index:90">
+          <div class="menu__label">操作</div>
+          <button class="menu__item">编辑</button>
+          <button class="menu__item">复制链接</button>
+          <div class="menu__sep"></div>
+          <button class="menu__item menu__item--danger">删除</button>
+        </div>
+      </div>
+    </div>
+
+    <dialog class="dialog" id="dlg-demo" data-backdrop-close>
+      <div class="dialog__header">
+        <div class="dialog__title">确认操作</div>
+        <button class="dialog__close" data-dialog-close aria-label="关闭">×</button>
+      </div>
+      <div class="dialog__body">
+        <p>这个操作会删除该项目及其所有文件，无法撤销。</p>
+      </div>
+      <div class="dialog__footer">
+        <button class="btn btn--quiet" data-dialog-close>取消</button>
+        <button class="btn btn--danger" data-dialog-close>确认删除</button>
+      </div>
+    </dialog>
+  </section>
+
+  <!-- 导航 -->
+  <section class="demo-section">
+    <h2>导航</h2>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="p1" id="t1">概览</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p2" id="t2">设置</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p3" id="t3">日志</button>
+    </div>
+    <div id="p1" role="tabpanel" aria-labelledby="t1" class="p-lg">概览内容…</div>
+    <div id="p2" role="tabpanel" aria-labelledby="t2" class="p-lg" hidden>设置内容…</div>
+    <div id="p3" role="tabpanel" aria-labelledby="t3" class="p-lg" hidden>日志内容…</div>
+
+    <div class="tabs tabs--pill mt-lg">
+      <button class="tab" aria-selected="true">全部</button>
+      <button class="tab" aria-selected="false">进行中</button>
+      <button class="tab" aria-selected="false">已完成</button>
+    </div>
+
+    <ol class="breadcrumb mt-lg">
+      <li><a href="#">首页</a></li>
+      <li><a href="#">项目</a></li>
+      <li aria-current="page">详情</li>
+    </ol>
+
+    <nav class="pagination mt-lg" aria-label="分页">
+      <button class="pagination__item" disabled>上一页</button>
+      <button class="pagination__item" aria-current="page">1</button>
+      <button class="pagination__item">2</button>
+      <button class="pagination__item">3</button>
+      <button class="pagination__item">下一页</button>
+    </nav>
+  </section>
+
+  <!-- 数据 -->
+  <section class="demo-section">
+    <h2>数据展示</h2>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>任务</th><th>状态</th><th class="num">耗时</th></tr></thead>
+        <tbody>
+          <tr><td>demo.mp4</td><td><span class="badge badge--success">完成</span></td><td class="num">1.4s</td></tr>
+          <tr><td>talk.mp4</td><td><span class="badge badge--warning">处理中</span></td><td class="num">—</td></tr>
+          <tr><td>broken.mp4</td><td><span class="badge badge--danger">失败</span></td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid grid--3 mt-lg">
+      <div class="stat">
+        <span class="stat__label">今日任务</span>
+        <span class="stat__value">128</span>
+        <span class="stat__delta stat__delta--up">↑ 12%</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">平均耗时</span>
+        <span class="stat__value">1.8s</span>
+        <span class="stat__delta stat__delta--down">↓ 4%</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">失败率</span>
+        <span class="stat__value">0.4%</span>
+      </div>
+    </div>
+
+    <div class="grid grid--2 mt-lg">
+      <dl class="desc">
+        <dt>引擎</dt><dd>sherpa-onnx</dd>
+        <dt>模型</dt><dd>sense-voice</dd>
+        <dt>大小</dt><dd>228.5 MB</dd>
+      </dl>
+      <ul class="timeline">
+        <li class="timeline__item"><div class="timeline__time">10:24</div>开始转录</li>
+        <li class="timeline__item"><div class="timeline__time">10:25</div>识别完成，10 条字幕</li>
+        <li class="timeline__item"><div class="timeline__time">10:26</div>软字幕合成完毕</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 折叠 -->
+  <section class="demo-section">
+    <h2>折叠与切换</h2>
+    <div class="accordion">
+      <details class="accordion__item" open>
+        <summary class="accordion__trigger">什么是 lyco-sub？</summary>
+        <div class="accordion__panel">一个本地优先的字幕生成工具，人类用界面，AI 用 CLI。</div>
+      </details>
+      <details class="accordion__item">
+        <summary class="accordion__trigger">需要联网吗？</summary>
+        <div class="accordion__panel">首次使用需要下载模型，之后完全离线。</div>
+      </details>
+      <details class="accordion__item">
+        <summary class="accordion__trigger">支持哪些格式？</summary>
+        <div class="accordion__panel">mp4 / mkv / mov / wav / mp3。</div>
+      </details>
+    </div>
+
+    <div class="demo-row mt-lg">
+      <button class="toggle" aria-pressed="false">切换按钮</button>
+      <button class="toggle" aria-pressed="true">已激活</button>
+      <div class="toggle-group">
+        <button class="toggle" aria-pressed="true">日</button>
+        <button class="toggle" aria-pressed="false">周</button>
+        <button class="toggle" aria-pressed="false">月</button>
+      </div>
+    </div>
+
+    <div class="chips mt-lg">
+      <button class="chip" aria-pressed="true">全部</button>
+      <button class="chip" aria-pressed="false">视频</button>
+      <button class="chip" aria-pressed="false">音频</button>
+    </div>
+
+    <div class="ratio ratio--16x9 mt-lg">
+      <div class="center text-mute" style="background:var(--color-canvas-soft)">16:9 容器</div>
+    </div>
+  </section>
+
+  <!-- 命令面板 -->
+  <section class="demo-section">
+    <h2>命令面板</h2>
+    <p class="text-soft">支持输入过滤、上下键导航、回车执行。</p>
+    <div class="command" data-command>
+      <div class="command__search">
+        <span class="text-mute">⌕</span>
+        <input type="text" placeholder="搜索命令…" aria-label="搜索命令">
+      </div>
+      <div class="command__list">
+        <div class="command__group-label">操作</div>
+        <button class="command__item" aria-selected="true">新建项目<span class="command__item__desc">Ctrl N</span></button>
+        <button class="command__item" aria-selected="false">导入视频<span class="command__item__desc">Ctrl I</span></button>
+        <button class="command__item" aria-selected="false">导出字幕<span class="command__item__desc">Ctrl E</span></button>
+        <div class="command__group-label">设置</div>
+        <button class="command__item" aria-selected="false">切换主题<span class="command__item__desc">Ctrl J</span></button>
+        <button class="command__item" aria-selected="false">打开配置<span class="command__item__desc">Ctrl ,</span></button>
+        <div class="command__empty" hidden>没有匹配的命令</div>
+      </div>
+      <div class="command__footer">
+        <span><span class="kbd">↑</span><span class="kbd">↓</span> 选择</span>
+        <span><span class="kbd">↵</span> 执行</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-sm text-mute" style="padding-top:32px;border-top:1px solid var(--color-line)">
+    lain42 UI · MIT · 所有颜色经 WCAG AA 校验
+  </footer>
+
+</main>
+
+<script src="src/ui.js"></script>
+</body>
+</html>

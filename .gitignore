@@ -5,3 +5,10 @@ lint.json
 Thumbs.db
 __pycache__/
 *.pyc
+
+# 验证过程的临时产物
+_pix_*.html
+_pix_*.png
+_probe*.html
+_dbg.html
+shots/

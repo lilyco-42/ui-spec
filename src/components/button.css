@@ -1,0 +1,142 @@
+/* ============================================================
+   button.css — 按钮与按钮组
+   商业 UI 的硬性要求：44px 最小触摸区、清晰的禁用态、可见焦点
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--rounded-md);
+  background: var(--color-button);
+  color: var(--color-on-button);
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .16s, background-color .16s, border-color .16s, opacity .16s;
+}
+
+.btn:hover:not(:disabled) { transform: translateY(-1px); }
+.btn:active:not(:disabled) { transform: translateY(0); }
+
+/* 禁用态用换色，不用 opacity。
+   opacity:.55 会把白字压到灰底上，实测只有 3.74:1，不达 WCAG AA。 */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  transform: none;
+  background: var(--color-disabled-surface);
+  color: var(--color-disabled-ink);
+  border-color: transparent;
+  box-shadow: none;
+}
+.btn--secondary:disabled,
+.btn--quiet:disabled,
+.btn--ghost:disabled {
+  background: var(--color-disabled-surface);
+  color: var(--color-disabled-ink);
+  border-color: var(--color-line);
+}
+
+/* ---- 变体 ---- */
+.btn--brand {
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+}
+
+.btn--secondary {
+  background: var(--color-surface);
+  border-color: var(--color-line-strong);
+  color: var(--color-ink);
+}
+.btn--secondary:hover:not(:disabled) { background: var(--color-surface-hover); }
+
+.btn--quiet {
+  background: var(--color-canvas-soft);
+  color: var(--color-ink);
+}
+.btn--quiet:hover:not(:disabled) { background: var(--color-surface-hover); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-ink-soft);
+}
+.btn--ghost:hover:not(:disabled) {
+  background: var(--color-canvas-soft);
+  color: var(--color-ink);
+}
+
+.btn--danger {
+  background: var(--color-danger);
+  /* 暗色下 --color-danger 是亮红 #ff8278，白字只有 2.41:1。
+     用 on-danger 令牌，暗色自动切成深色文字。 */
+  color: var(--color-on-danger);
+}
+
+.btn--link {
+  background: transparent;
+  color: var(--color-brand);
+  min-height: auto;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---- 尺寸 ---- */
+.btn--sm { min-height: 36px; padding: 6px 12px; font-size: 13px; }
+.btn--lg { min-height: 52px; padding: 14px 22px; font-size: 16px; }
+
+/* ---- 图标按钮 ---- */
+.btn--icon {
+  width: 44px;
+  min-width: 44px;
+  padding: 0;
+}
+.btn--icon.btn--sm { width: 36px; min-width: 36px; }
+
+/* ---- 加载态 ---- */
+.btn[data-loading="true"] {
+  color: transparent;
+  pointer-events: none;
+  position: relative;
+}
+.btn[data-loading="true"]::after {
+  content: "";
+  position: absolute;
+  width: 16px; height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  color: var(--color-on-button);
+  animation: btn-spin .7s linear infinite;
+}
+.btn--secondary[data-loading="true"]::after,
+.btn--quiet[data-loading="true"]::after { color: var(--color-ink); }
+
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+
+/* ---- 按钮组 ---- */
+.btn-group {
+  display: inline-flex;
+}
+.btn-group .btn {
+  border-radius: 0;
+  border-right-width: 0;
+}
+.btn-group .btn:first-child {
+  border-top-left-radius: var(--rounded-md);
+  border-bottom-left-radius: var(--rounded-md);
+}
+.btn-group .btn:last-child {
+  border-top-right-radius: var(--rounded-md);
+  border-bottom-right-radius: var(--rounded-md);
+  border-right-width: 1px;
+}
+.btn-group .btn:focus-visible { position: relative; z-index: 1; }
