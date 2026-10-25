@@ -1,0 +1,142 @@
+/* ============================================================
+   chart.css — 迷你图、柱状图、环形进度
+   纯 CSS 实现，不需要图表库。复杂图表才该上 ECharts/Recharts
+   ============================================================ */
+
+/* ---- 迷你折线（sparkline）：用 SVG，样式只给颜色 ---- */
+.sparkline {
+  display: block;
+  width: 100%;
+  height: 40px;
+  overflow: visible;
+}
+.sparkline path.line {
+  fill: none;
+  stroke: var(--color-brand);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sparkline path.area {
+  fill: color-mix(in srgb, var(--color-brand) 14%, transparent);
+  stroke: none;
+}
+.sparkline circle {
+  fill: var(--color-brand);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+
+/* ---- 柱状图 ---- */
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 140px;
+  padding: var(--spacing-md) 0;
+}
+.bars__bar {
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--rounded-sm) var(--rounded-sm) 0 0;
+  background: var(--color-brand-soft);
+  transition: background-color .14s;
+  position: relative;
+}
+.bars__bar:hover { background: var(--color-brand); }
+.bars__bar--active { background: var(--color-brand); }
+
+.bars__labels {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+.bars__labels span {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-size: 11px;
+  color: var(--color-ink-mute);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- 水平条（排行榜） ---- */
+.bar-list { display: grid; gap: var(--spacing-md); }
+.bar-list__row {
+  display: grid;
+  grid-template-columns: minmax(72px, 120px) 1fr auto;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: 13px;
+}
+.bar-list__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-ink-soft);
+}
+.bar-list__track {
+  height: 8px;
+  border-radius: var(--rounded-pill);
+  background: var(--color-canvas-soft);
+  overflow: hidden;
+}
+.bar-list__fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-brand);
+}
+.bar-list__value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* ---- 环形进度（conic-gradient） ---- */
+.ring {
+  --pct: 0;
+  display: grid;
+  place-items: center;
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--color-brand) calc(var(--pct) * 1%),
+    var(--color-line) 0
+  );
+  position: relative;
+}
+.ring::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+.ring__value {
+  position: relative;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+.ring--lg { width: 108px; height: 108px; }
+.ring--lg::before { inset: 10px; }
+.ring--lg .ring__value { font-size: 20px; }
+
+/* ---- 图例 ---- */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  font-size: 12px;
+  color: var(--color-ink-soft);
+}
+.legend__item { display: inline-flex; align-items: center; gap: 5px; }
+.legend__swatch {
+  width: 9px; height: 9px;
+  border-radius: 2px;
+  background: var(--color-brand);
+  flex: none;
+}

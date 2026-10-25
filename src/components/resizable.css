@@ -1,0 +1,63 @@
+/* ============================================================
+   resizable.css — 可调整面板（分栏拖拽）、左右分栏
+   用 CSS resize 或拖拽手柄；这里给拖拽手柄样式
+   ============================================================ */
+
+.split {
+  display: flex;
+  min-height: 240px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--rounded-md);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.split__pane {
+  min-width: 0;
+  padding: var(--spacing-lg);
+  overflow: auto;
+}
+.split__pane--fixed { flex: 0 0 var(--pane-size, 240px); }
+.split__pane--grow { flex: 1; }
+
+/* ---- 拖拽手柄 ---- */
+.split__handle {
+  position: relative;
+  flex: 0 0 1px;
+  background: var(--color-line);
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+}
+/* 视觉 1px，实际可点区域 9px */
+.split__handle::after {
+  content: "";
+  position: absolute;
+  inset: 0 -4px;
+}
+.split__handle:hover,
+.split__handle[data-dragging="true"] { background: var(--color-brand); }
+.split__handle:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* 竖向 */
+.split--vertical { flex-direction: column; }
+.split--vertical .split__handle {
+  flex-basis: 1px;
+  cursor: row-resize;
+}
+.split--vertical .split__handle::after { inset: -4px 0; }
+
+/* ---- 可拖拽调整的文本域 ---- */
+.resize-both { resize: both; overflow: auto; min-width: 160px; min-height: 80px; }
+.resize-x { resize: horizontal; overflow: auto; }
+.resize-y { resize: vertical; overflow: auto; }
+
+/* ---- 面板分隔线（视觉用） ---- */
+.split__divider {
+  flex: 0 0 1px;
+  background: var(--color-line);
+  margin: var(--spacing-md) 0;
+}

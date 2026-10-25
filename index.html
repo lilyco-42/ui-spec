@@ -405,6 +405,239 @@
     </div>
   </section>
 
+  <!-- 日历 -->
+  <section class="demo-section">
+    <h2>日历</h2>
+    <p class="text-soft">用 table 语义，屏幕阅读器可读；今天用描边、选中用实心，不互相抢。</p>
+    <div class="grid grid--2">
+      <div class="calendar">
+        <div class="calendar__header">
+          <button class="calendar__nav" aria-label="上个月">‹</button>
+          <div class="calendar__title">2026 年 10 月</div>
+          <button class="calendar__nav" aria-label="下个月">›</button>
+        </div>
+        <table>
+          <thead><tr><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><button class="calendar__day calendar__day--outside">28</button></td>
+              <td><button class="calendar__day calendar__day--outside">29</button></td>
+              <td><button class="calendar__day calendar__day--outside">30</button></td>
+              <td><button class="calendar__day">1</button></td>
+              <td><button class="calendar__day">2</button></td>
+              <td><button class="calendar__day">3</button></td>
+              <td><button class="calendar__day">4</button></td>
+            </tr>
+            <tr>
+              <td><button class="calendar__day">5</button></td>
+              <td><button class="calendar__day">6</button></td>
+              <td><button class="calendar__day">7</button></td>
+              <td><button class="calendar__day">8</button></td>
+              <td><button class="calendar__day">9</button></td>
+              <td><button class="calendar__day">10</button></td>
+              <td><button class="calendar__day">11</button></td>
+            </tr>
+            <tr>
+              <td><button class="calendar__day">12</button></td>
+              <td><button class="calendar__day">13</button></td>
+              <td><button class="calendar__day">14</button></td>
+              <td><button class="calendar__day">15</button></td>
+              <td><button class="calendar__day">16</button></td>
+              <td><button class="calendar__day">17</button></td>
+              <td><button class="calendar__day">18</button></td>
+            </tr>
+            <tr>
+              <td><button class="calendar__day">19</button></td>
+              <td><button class="calendar__day">20</button></td>
+              <td><button class="calendar__day calendar__day--today">21</button></td>
+              <td><button class="calendar__day calendar__day--in-range">22</button></td>
+              <td><button class="calendar__day" aria-selected="true">23</button></td>
+              <td><button class="calendar__day calendar__day--in-range">24</button></td>
+              <td><button class="calendar__day">25</button></td>
+            </tr>
+            <tr>
+              <td><button class="calendar__day">26</button></td>
+              <td><button class="calendar__day">27</button></td>
+              <td><button class="calendar__day">28</button></td>
+              <td><button class="calendar__day">29</button></td>
+              <td><button class="calendar__day">30</button></td>
+              <td><button class="calendar__day">31</button></td>
+              <td><button class="calendar__day calendar__day--outside">1</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="stack">
+        <div class="field date-field">
+          <label class="label" for="dt1">日期选择</label>
+          <input class="input" id="dt1" value="2026-10-23" readonly>
+          <span class="date-field__icon">▤</span>
+        </div>
+        <div class="field">
+          <label class="label">禁用日期</label>
+          <p class="text-sm text-soft">过去日期带删除线且不可点。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 组合框 -->
+  <section class="demo-section">
+    <h2>组合框</h2>
+    <p class="text-soft">比原生 select 强：可过滤、可多选、可显示描述。</p>
+    <div class="grid grid--2">
+      <div class="combobox">
+        <button class="combobox__trigger" aria-expanded="false">
+          <span class="combobox__value">已选择：sherpa-onnx</span>
+          <span class="combobox__caret">▾</span>
+        </button>
+        <div class="combobox__panel">
+          <input class="combobox__search" placeholder="搜索引擎…">
+          <button class="combobox__option" data-active="true">
+            <span class="combobox__option__label">sherpa-onnx<span class="combobox__option__desc">27MB，0.1s 启动</span></span>
+            <span class="combobox__option__check">✓</span>
+          </button>
+          <button class="combobox__option">
+            <span class="combobox__option__label">funasr<span class="combobox__option__desc">476MB，需 torch</span></span>
+          </button>
+          <button class="combobox__option">
+            <span class="combobox__option__label">whisper<span class="combobox__option__desc">跨语言</span></span>
+          </button>
+          <div class="combobox__empty" hidden>没有匹配项</div>
+        </div>
+      </div>
+      <div class="combobox">
+        <div class="combobox__trigger" aria-expanded="false">
+          <div class="combobox__tags">
+            <span class="combobox__tag">中文<button aria-label="移除">×</button></span>
+            <span class="combobox__tag">日语<button aria-label="移除">×</button></span>
+          </div>
+          <span class="combobox__caret">▾</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 轮播 -->
+  <section class="demo-section">
+    <h2>轮播</h2>
+    <p class="text-soft">用 scroll-snap 实现，不写 JS 也能滑。</p>
+    <div class="carousel">
+      <div class="carousel__track">
+        <div class="carousel__slide">
+          <div class="ratio ratio--16x9"><div class="center text-mute" style="background:var(--color-canvas-soft)">第 1 张</div></div>
+        </div>
+        <div class="carousel__slide">
+          <div class="ratio ratio--16x9"><div class="center text-mute" style="background:var(--color-surface-hover)">第 2 张</div></div>
+        </div>
+        <div class="carousel__slide">
+          <div class="ratio ratio--16x9"><div class="center text-mute" style="background:var(--color-canvas-soft)">第 3 张</div></div>
+        </div>
+      </div>
+      <button class="carousel__nav carousel__nav--prev" aria-label="上一张">‹</button>
+      <button class="carousel__nav carousel__nav--next" aria-label="下一张">›</button>
+    </div>
+    <div class="carousel__dots">
+      <button class="carousel__dot" aria-current="true" aria-label="第 1 张"></button>
+      <button class="carousel__dot" aria-label="第 2 张"></button>
+      <button class="carousel__dot" aria-label="第 3 张"></button>
+    </div>
+  </section>
+
+  <!-- 可调整面板 -->
+  <section class="demo-section">
+    <h2>可调整面板</h2>
+    <p class="text-soft">视觉 1px 手柄，实际可点 9px —— 不靠加粗破坏视觉。</p>
+    <div class="split">
+      <div class="split__pane split__pane--fixed" style="--pane-size:200px">
+        <div class="text-sm semibold mb-sm">侧栏</div>
+        <p class="text-sm text-soft">固定宽度，可拖拽调整。</p>
+      </div>
+      <div class="split__handle" role="separator" aria-orientation="vertical" tabindex="0" aria-label="调整宽度"></div>
+      <div class="split__pane split__pane--grow">
+        <div class="text-sm semibold mb-sm">主区域</div>
+        <p class="text-sm text-soft">自动填满剩余空间。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 图表 -->
+  <section class="demo-section">
+    <h2>图表</h2>
+    <p class="text-soft">简单图表纯 CSS，不引图表库；复杂图表才该上 ECharts。</p>
+    <div class="grid grid--2">
+      <div class="card">
+        <div class="card__title mb-sm">柱状图</div>
+        <div class="bars">
+          <div class="bars__bar" style="height:40%"></div>
+          <div class="bars__bar" style="height:65%"></div>
+          <div class="bars__bar" style="height:35%"></div>
+          <div class="bars__bar bars__bar--active" style="height:88%"></div>
+          <div class="bars__bar" style="height:52%"></div>
+          <div class="bars__bar" style="height:70%"></div>
+        </div>
+        <div class="bars__labels"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+      </div>
+      <div class="card">
+        <div class="card__title mb-md">环形进度</div>
+        <div class="demo-row">
+          <div class="ring" style="--pct:72"><span class="ring__value">72%</span></div>
+          <div class="ring ring--lg" style="--pct:38"><span class="ring__value">38%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-lg">
+      <div class="card__title mb-md">排行榜</div>
+      <div class="bar-list">
+        <div class="bar-list__row"><span class="bar-list__name">sense-voice</span><span class="bar-list__track"><span class="bar-list__fill" style="width:92%"></span></span><span class="bar-list__value">92</span></div>
+        <div class="bar-list__row"><span class="bar-list__name">paraformer</span><span class="bar-list__track"><span class="bar-list__fill" style="width:78%"></span></span><span class="bar-list__value">78</span></div>
+        <div class="bar-list__row"><span class="bar-list__name">whisper</span><span class="bar-list__track"><span class="bar-list__fill" style="width:54%"></span></span><span class="bar-list__value">54</span></div>
+      </div>
+      <div class="legend mt-md">
+        <span class="legend__item"><span class="legend__swatch"></span>识别准确率</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 对话 -->
+  <section class="demo-section">
+    <h2>对话</h2>
+    <p class="text-soft">AI 产品必备；自己的消息用品牌色底，别人的用灰底。</p>
+    <div class="chat">
+      <div class="message message--in">
+        <span class="message__avatar">AI</span>
+        <div class="message__body">
+          <div class="message__meta"><span class="message__name">助手</span><span>10:24</span></div>
+          <div class="message__bubble">这个视频有 10 条字幕，需要我导出为 SRT 吗？</div>
+        </div>
+      </div>
+      <div class="message message--out">
+        <span class="message__avatar">我</span>
+        <div class="message__body">
+          <div class="message__meta"><span class="message__name">我</span><span>10:25</span></div>
+          <div class="message__bubble">好，顺便把软字幕也烧进视频。</div>
+        </div>
+      </div>
+      <div class="message message--in">
+        <span class="message__avatar">AI</span>
+        <div class="message__body">
+          <div class="message__meta"><span class="message__name">助手</span><span>10:26</span></div>
+          <div class="typing"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="message message--system">
+        <div class="message__bubble">处理耗时 1.4 秒</div>
+      </div>
+    </div>
+    <div class="composer mt-md">
+      <textarea placeholder="输入消息…" rows="1"></textarea>
+      <div class="composer__actions">
+        <button class="btn btn--brand btn--sm">发送</button>
+      </div>
+    </div>
+  </section>
+
   <footer class="text-sm text-mute" style="padding-top:32px;border-top:1px solid var(--color-line)">
     lain42 UI · MIT · 所有颜色经 WCAG AA 校验
   </footer>

@@ -68,6 +68,17 @@ COLLECT_JS = r"""
     if (r.width < 2 || r.height < 2) continue;
     // 跳过完全不可见的元素（skip-link 平时在 top:-60px）
     if (r.bottom < 0) continue;
+    // 跳过横向溢出容器里滚出视野的元素（如轮播未滑到的 slide）。
+    // 它们在截图里根本不存在，采样会拿到错误像素，产生假失败。
+    let clipped = false;
+    for (let p = el.parentElement; p && p !== document.body; p = p.parentElement) {
+      const pcs = getComputedStyle(p);
+      if (pcs.overflowX === "auto" || pcs.overflowX === "hidden" || pcs.overflowX === "scroll") {
+        const pr = p.getBoundingClientRect();
+        if (r.right <= pr.left || r.left >= pr.right) { clipped = true; break; }
+      }
+    }
+    if (clipped) continue;
     // 跳过透明/近乎透明的文字
     const fgAlpha = cs.color.startsWith("rgba") ? parseFloat(cs.color.split(",")[3]) : 1;
     if (fgAlpha < 0.9) continue;

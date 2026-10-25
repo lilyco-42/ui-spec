@@ -32,6 +32,12 @@ ORDER = [
     "components/data.css",
     "components/disclosure.css",
     "components/command.css",
+    "components/calendar.css",
+    "components/combobox.css",
+    "components/carousel.css",
+    "components/resizable.css",
+    "components/chart.css",
+    "components/chat.css",
     "utilities.css",
 ]
 

@@ -1,0 +1,152 @@
+/* ============================================================
+   chat.css — 对话气泡、消息列表、输入区
+   AI 产品必备；同时适合客服、评论线程
+   ============================================================ */
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg) 0;
+}
+
+/* ---- 单条消息 ---- */
+.message {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+}
+.message--out { flex-direction: row-reverse; }
+
+.message__avatar {
+  display: grid;
+  place-items: center;
+  width: 30px; height: 30px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.message__body { min-width: 0; max-width: min(72ch, 82%); }
+
+.message__meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: var(--color-ink-mute);
+}
+.message--out .message__meta { flex-direction: row-reverse; }
+.message__name { font-weight: 650; color: var(--color-ink); }
+
+.message__bubble {
+  padding: 10px 14px;
+  border-radius: var(--rounded-md);
+  background: var(--color-canvas-soft);
+  color: var(--color-ink);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* 自己发的：品牌色底 */
+.message--out .message__bubble {
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+  border-bottom-right-radius: var(--rounded-sm);
+}
+.message--in .message__bubble {
+  border-bottom-left-radius: var(--rounded-sm);
+}
+
+/* 气泡内的代码/引用 */
+.message__bubble pre {
+  margin: var(--spacing-sm) 0;
+  background: color-mix(in srgb, var(--color-ink) 6%, transparent);
+  border-color: transparent;
+}
+.message--out .message__bubble pre {
+  background: color-mix(in srgb, #ffffff 16%, transparent);
+  color: inherit;
+}
+.message__bubble code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--color-ink) 7%, transparent);
+  font-size: .92em;
+}
+
+/* 系统提示 */
+.message--system {
+  justify-content: center;
+}
+.message--system .message__bubble {
+  background: transparent;
+  color: var(--color-ink-mute);
+  font-size: 12px;
+  padding: 4px 12px;
+}
+
+/* ---- 打字指示 ---- */
+.typing {
+  display: inline-flex;
+  gap: 4px;
+  padding: 12px 16px;
+  border-radius: var(--rounded-md);
+  background: var(--color-canvas-soft);
+}
+.typing span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--color-ink-mute);
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+.typing span:nth-child(2) { animation-delay: .15s; }
+.typing span:nth-child(3) { animation-delay: .3s; }
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: .5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* ---- 输入区 ---- */
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--rounded-lg);
+  background: var(--color-surface);
+}
+.composer:focus-within {
+  border-color: var(--color-focus-ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus-ring) 22%, transparent);
+}
+.composer textarea {
+  flex: 1;
+  min-height: 40px;
+  max-height: 160px;
+  padding: 9px 10px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 14px;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+}
+.composer textarea::placeholder { color: var(--color-ink-mute); }
+.composer__actions { display: flex; align-items: center; gap: 4px; padding-bottom: 2px; }
+
+/* ---- 消息列表滚动容器 ---- */
+.chat-scroller {
+  max-height: 60vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding: 0 var(--spacing-sm);
+}

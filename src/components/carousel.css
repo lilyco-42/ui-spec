@@ -1,0 +1,115 @@
+/* ============================================================
+   carousel.css — 轮播、图片画廊、缩略图导航
+   用原生 scroll-snap，不写 JS 也能滑动
+   ============================================================ */
+
+.carousel {
+  position: relative;
+  border-radius: var(--rounded-lg);
+  background: var(--color-canvas-soft);
+  overflow: hidden;
+}
+
+.carousel__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.carousel__track::-webkit-scrollbar { display: none; }
+
+.carousel__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.carousel__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel--wide .carousel__slide { flex-basis: 80%; }
+.carousel--narrow .carousel__slide { flex-basis: 50%; }
+
+/* ---- 左右按钮 ---- */
+.carousel__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  color: var(--color-ink);
+  font-size: 15px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: background-color .14s, opacity .14s;
+}
+.carousel__nav:hover { background: var(--color-surface); }
+.carousel__nav:disabled { opacity: .4; cursor: not-allowed; }
+.carousel__nav--prev { left: 12px; }
+.carousel__nav--next { right: 12px; }
+
+/* ---- 圆点指示器 ---- */
+.carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: var(--spacing-md) 0;
+}
+.carousel__dot {
+  width: 8px; height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-line-strong);
+  cursor: pointer;
+  transition: background-color .16s, width .16s;
+}
+.carousel__dot[aria-current="true"] {
+  width: 20px;
+  border-radius: var(--rounded-pill);
+  background: var(--color-brand);
+}
+
+/* ---- 缩略图导航 ---- */
+.carousel__thumbs {
+  display: flex;
+  gap: 6px;
+  padding: var(--spacing-sm);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.carousel__thumbs::-webkit-scrollbar { display: none; }
+.carousel__thumb {
+  flex: 0 0 64px;
+  height: 44px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--rounded-sm);
+  background: var(--color-surface);
+  overflow: hidden;
+  cursor: pointer;
+  opacity: .6;
+  transition: opacity .14s, border-color .14s;
+}
+.carousel__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.carousel__thumb[aria-current="true"] {
+  border-color: var(--color-brand);
+  opacity: 1;
+}
+
+/* ---- 单张图带说明 ---- */
+.carousel__caption {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 13px;
+  color: var(--color-ink-soft);
+  background: var(--color-surface);
+}

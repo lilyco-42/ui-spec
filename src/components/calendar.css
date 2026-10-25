@@ -1,0 +1,118 @@
+/* ============================================================
+   calendar.css — 日历、日期选择器、日期范围
+   商业 UI 必备；用 table 语义，屏幕阅读器可读
+   ============================================================ */
+
+.calendar {
+  width: max-content;
+  max-width: 100%;
+  padding: var(--spacing-lg);
+  border: 1px solid var(--color-line);
+  border-radius: var(--rounded-lg);
+  background: var(--color-surface);
+}
+
+.calendar__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+.calendar__title {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 650;
+  text-align: center;
+}
+
+.calendar__nav {
+  display: grid;
+  place-items: center;
+  width: 32px; height: 32px;
+  border: 0;
+  border-radius: var(--rounded-sm);
+  background: transparent;
+  color: var(--color-ink-soft);
+  font-size: 14px;
+  cursor: pointer;
+}
+.calendar__nav:hover { background: var(--color-canvas-soft); color: var(--color-ink); }
+.calendar__nav:disabled { color: var(--color-disabled-ink); cursor: not-allowed; }
+
+.calendar table {
+  border-collapse: separate;
+  border-spacing: 2px;
+  width: 100%;
+}
+
+.calendar th {
+  padding: 4px 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink-mute);
+  text-align: center;
+}
+
+.calendar td { padding: 0; }
+
+.calendar__day {
+  display: grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  border: 0;
+  border-radius: var(--rounded-sm);
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background-color .12s, color .12s;
+}
+.calendar__day:hover:not(:disabled) { background: var(--color-canvas-soft); }
+
+/* 今天：只加描边，不抢选中态 */
+.calendar__day--today {
+  box-shadow: inset 0 0 0 1px var(--color-line-strong);
+  font-weight: 700;
+}
+
+/* 选中 */
+.calendar__day[aria-selected="true"] {
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+  font-weight: 700;
+}
+.calendar__day[aria-selected="true"]:hover { background: var(--color-brand); }
+
+/* 范围中间 */
+.calendar__day--in-range {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  border-radius: 0;
+}
+
+/* 非本月 */
+.calendar__day--outside {
+  color: var(--color-ink-mute);
+  opacity: .6;
+}
+
+.calendar__day:disabled {
+  color: var(--color-disabled-ink);
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* ---- 日期输入框 ---- */
+.date-field { position: relative; }
+.date-field .input { padding-right: 40px; cursor: pointer; }
+.date-field__icon {
+  position: absolute;
+  right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-ink-mute);
+  pointer-events: none;
+}
+
+/* 弹出层里的日历去掉外边框 */
+.popover > .calendar { padding: 0; border: 0; background: transparent; }
