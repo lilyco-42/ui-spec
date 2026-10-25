@@ -324,6 +324,100 @@ components:
   scrim-dark:
     backgroundColor: "{colors.dark-overlay}"
     textColor: "{colors.dark-ink}"
+
+  # ---- 日历 ----
+  calendar-day:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.sm}"
+    padding: 0
+  calendar-day-selected:
+    backgroundColor: "{colors.brand}"
+    textColor: "{colors.on-brand}"
+    rounded: "{rounded.sm}"
+    padding: 0
+  calendar-day-range:
+    backgroundColor: "{colors.brand-soft}"
+    textColor: "{colors.brand}"
+    padding: 0
+  calendar-day-disabled:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.disabled-ink}"
+    rounded: "{rounded.sm}"
+    padding: 0
+
+  # ---- 组合框 ----
+  combobox-trigger:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: 8px 12px
+    height: 44px
+  combobox-option:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.sm}"
+    padding: 8px 10px
+  combobox-option-active:
+    backgroundColor: "{colors.brand-soft}"
+    textColor: "{colors.brand}"
+    rounded: "{rounded.sm}"
+    padding: 8px 10px
+  combobox-tag:
+    backgroundColor: "{colors.brand-soft}"
+    textColor: "{colors.brand}"
+    rounded: "{rounded.pill}"
+    padding: 2px 8px
+
+  # ---- 对话 ----
+  message-in:
+    backgroundColor: "{colors.canvas-soft}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: 10px 14px
+  message-out:
+    backgroundColor: "{colors.brand}"
+    textColor: "{colors.on-brand}"
+    rounded: "{rounded.md}"
+    padding: 10px 14px
+  composer:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.lg}"
+    padding: 8px
+
+  # ---- 图表 ----
+  chart-bar:
+    backgroundColor: "{colors.brand-soft}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.sm}"
+  chart-bar-active:
+    backgroundColor: "{colors.brand}"
+    textColor: "{colors.on-brand}"
+    rounded: "{rounded.sm}"
+  ring-track:
+    backgroundColor: "{colors.line}"
+    textColor: "{colors.ink}"
+
+  # ---- 轮播 ----
+  carousel-nav:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pill}"
+  carousel-dot:
+    backgroundColor: "{colors.line-strong}"
+    rounded: "{rounded.pill}"
+  carousel-dot-active:
+    backgroundColor: "{colors.brand}"
+    rounded: "{rounded.pill}"
+
+  # ---- 可调整面板 ----
+  split-handle:
+    backgroundColor: "{colors.line}"
+    textColor: "{colors.ink}"
+  split-handle-active:
+    backgroundColor: "{colors.brand}"
+    textColor: "{colors.on-brand}"
   page-inverse:
     backgroundColor: "{colors.button}"
     textColor: "{colors.ink-inverse}"

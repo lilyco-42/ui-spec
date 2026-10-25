@@ -5,7 +5,7 @@
 单一事实来源。
 
 ```
-DESIGN.md          ← 唯一事实来源（54 色 / 7 字号 / 48 组件）
+DESIGN.md          ← 唯一事实来源（54 色 / 7 字号 / 67 组件）
 src/               ← 组件源文件（改这里）
 dist/tokens.css    ← 由 DESIGN.md 生成，不要手改
 dist/ui.css        ← 由 src/ 合并生成，不要手改
@@ -33,6 +33,12 @@ verify_pixels.py   ← 真实渲染像素验证（抓 CSS 变量失效这类 bug
 | 数据 | `.table` · `.desc` · `.stat` · `.timeline` |
 | 折叠 | `.accordion` · `.collapsible` · `.toggle` · `.toggle-group` · `.separator` · `.ratio` · `.scroll-area` |
 | 命令面板 | `.command`（输入过滤 + 上下键 + 回车） |
+| 日历 | `.calendar` 今天/选中/范围/禁用 · `.date-field` |
+| 组合框 | `.combobox` 可搜索 · 多选标签 · 选项描述 |
+| 轮播 | `.carousel` scroll-snap · 圆点 · 缩略图 · 说明 |
+| 可调整面板 | `.split` 横向/纵向拖拽 · 1px 视觉 9px 热区 |
+| 图表 | `.sparkline` · `.bars` · `.bar-list` · `.ring` · `.legend` |
+| 对话 | `.message` 收发/系统 · `.typing` · `.composer` |
 
 `src/ui.js` 只做 CSS 做不到的部分：标签页键盘导航、`<dialog>` 开关、
 下拉菜单、Toast、命令面板过滤、主题切换。没有 JS 时页面仍可用。
